@@ -22,31 +22,31 @@ class DetailScreen extends StatelessWidget {
             Center(child: Text('Here are the form details')),
             Container(
               height: 50,
-              color: Colors.amber[600],
+              color: Colors.blue[50],
               child: Center(child:Text(form.name)
               ),
             ),
             Container(
               height: 50,
-              color: Colors.amber[500],
+              color: Colors.blue[50],
               child: Center(child: Text(form.surname),
               ),
             ),
             Container(
               height: 50,
-              color: Colors.amber[100],
+              color: Colors.blue[50],
               child: Center(child:Text(form.subject),
               ),
             ),
             Container(
               height: 50,
-              color: Colors.amber[100],
+              color: Colors.blue[50],
               child: Center(child: Text(form.genre),
               ),
             ),
             Container(
               height: 50,
-              color: Colors.amber[100],
+              color: Colors.blue[50],
               child: Center(child:Text(form.artist)
               ),
             ),

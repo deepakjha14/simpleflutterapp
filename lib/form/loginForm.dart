@@ -21,7 +21,6 @@ class MyLoginFormState extends State<LoginForm> {
   // Note: This is a GlobalKey<FormState>,
   // not a GlobalKey<MyCustomFormState>.
   final _formKey = GlobalKey<FormState>();
-  final controller = TextEditingController();
   final formState = new FormState();
   String _date =  new DateTime.now().toString().substring(0,11);
   FormModel formData = FormModel();
@@ -48,32 +47,14 @@ class MyLoginFormState extends State<LoginForm> {
 
     if(picked != null){
       setState(() =>_date = picked.toString().substring(0,11));
-      print('date selected is this $_date and $picked');
     }
   }
-
-  // Widget constructFormField(String hint, String validationMessage, String fieldName){
-  //   return TextFormField(
-  //                 decoration: InputDecoration(
-  //                   hintText: 'Enter first name',
-  //                   border: OutlineInputBorder(),
-  //                 ),
-  //                 validator: (value) {
-  //                   if (value.isEmpty) {
-  //                     return validationMessage;
-  //                   }
-  //                   return null;
-  //                 },
-  //                 onSaved: (val){
-  //                   formData[fieldName] = val;
-  //                 },
-  //   );
-  // }
 
   @override
   Widget build(BuildContext context) {
     // Build a Form widget using the _formKey created above.
     return Scaffold(
+      resizeToAvoidBottomInset:true,
       appBar: AppBar(
         // Here we take the value from the MyHomePage object that was created by
         // the App.build method, and use it to set our appbar title.
@@ -86,7 +67,8 @@ class MyLoginFormState extends State<LoginForm> {
           alignment: Alignment.center,
           child: Form(
             key: _formKey,
-            child: Column(
+            child: SingleChildScrollView(
+              child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.start,
               children: <Widget>[
@@ -104,7 +86,6 @@ class MyLoginFormState extends State<LoginForm> {
                     return null;
                   },
                   onSaved: (val){
-                    print('name saved is $val');
                     formData.name = val;
                   },
                 ),
@@ -212,32 +193,24 @@ class MyLoginFormState extends State<LoginForm> {
                   ),
                 ),
                 ),
-                // SizedBox(height: 30),
-                //   RaisedButton(
-                //     onPressed: () {},
-                //     child: const Text(
-                //       'Enabled Button',
-                //       style: TextStyle(fontSize: 20)
-                //     ),
-                // ),
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 8.0),
                     child: Center(
                       child: SizedBox(
                         width: 300.0,
                         child: RaisedButton(
-                      onPressed: () {
-                        // Validate returns true if the form is valid, or false
-                        // otherwise.
-                        if (_formKey.currentState.validate()) {
-                          _formKey.currentState.save();
-                          //Navigator.pushNamed(context, '/detail');
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(builder: (context) => DetailScreen(form:formData)),
-                          );
-                        }
-                      },
+                          onPressed: () {
+                          // Validate returns true if the form is valid, or false
+                          // otherwise.
+                          if (_formKey.currentState.validate()) {
+                            _formKey.currentState.save();
+                            //Navigator.pushNamed(context, '/detail');
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(builder: (context) => DetailScreen(form:formData)),
+                            );
+                          }
+                        },
                       child: Text(
                         'Submit Form',
                         style: TextStyle(fontSize: 20)
@@ -248,6 +221,8 @@ class MyLoginFormState extends State<LoginForm> {
                 ),
               ],
             ),
+            ),
+            
           ),
         ),
       ),
